@@ -84444,6 +84444,7 @@ function run() {
         try {
             // Default client region is set by configure-aws-credentials
             const client = new client_secrets_manager_1.SecretsManagerClient({ region: "af-south-1", customUserAgent: "github-action" });
+            core.info(JSON.stringify(client.config));
             const secretConfigInputs = ["testenc,test"]; //[...new Set(core.getMultilineInput('secret-ids'))];
             const parseJsonSecrets = true; //core.getBooleanInput('parse-json-secrets');
             const nameTransformation = (0, utils_1.parseTransformationFunction)("lowercase"); //core.getInput('name-transformation') | "uppercase");
