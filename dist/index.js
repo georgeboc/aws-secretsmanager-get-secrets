@@ -84631,10 +84631,16 @@ function getSecretValue(client, secretId) {
         let secretValue = '';
         core.info(Date.now());
         console.time("request");
-        const data = yield client.send(new client_secrets_manager_1.GetSecretValueCommand({ SecretId: secretId }));
-        console.timeEnd("request");
-        core.info(Date.now());
-        console.log(data);
+        var data;
+        try {
+            data = yield client.send(new client_secrets_manager_1.GetSecretValueCommand({ SecretId: secretId }));
+        }
+        finally {
+            console.timeEnd("request");
+            core.info(Date.now());
+            console.log(data);
+            core.info(data);
+        }
         if (data.SecretString) {
             secretValue = data.SecretString;
         }

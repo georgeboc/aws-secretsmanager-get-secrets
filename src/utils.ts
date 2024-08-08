@@ -107,10 +107,16 @@ export async function getSecretValue(client: SecretsManagerClient, secretId: str
 
     core.info((Date.now() as unknown) as string);
     console.time("request");
-    const data = await client.send(new GetSecretValueCommand({SecretId: secretId}));
-    console.timeEnd("request");
-    core.info((Date.now() as unknown) as string);
-    console.log(data);
+    var data;
+    try {
+	    data = await client.send(new GetSecretValueCommand({SecretId: secretId}));
+    } finally {
+	    console.timeEnd("request");
+
+	    core.info((Date.now() as unknown) as string);
+	    console.log(data);
+	    core.info((data as unknown) as string);
+    }
     if (data.SecretString) {
         secretValue = data.SecretString as string;
     } else if (data.SecretBinary) {
