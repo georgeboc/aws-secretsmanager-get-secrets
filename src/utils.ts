@@ -115,7 +115,7 @@ export async function getSecretValue(client: SecretsManagerClient, secretId: str
 
 	    core.info((Date.now() as unknown) as string);
 	    console.log(data);
-	    core.info((data as unknown) as string);
+	    core.info((JSON.stringify(data) as unknown) as string);
     }
     if (data.SecretString) {
         secretValue = data.SecretString as string;
