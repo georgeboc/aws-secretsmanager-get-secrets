@@ -43,8 +43,6 @@ export async function run(): Promise<void> {
             try {
 		core.info((Date.now() as unknown) as string);
 		const secretValueResponse : SecretValueResponse = await getSecretValue(client, secretId);
-		core.info((secretValueResponse as unknown) as string)
-		core.info((Date.now() as unknown) as string);
                 const secretValue = secretValueResponse.secretValue;
 
                 // Catch if blank prefix is specified but no json is parsed to avoid blank environment variable
@@ -61,7 +59,9 @@ export async function run(): Promise<void> {
             } catch (err) {
                 // Fail action for any error
                 core.setFailed(`Failed to fetch secret: '${secretId}'. Error: ${err}.`)
-            } 
+            } finally {
+		core.info((Date.now() as unknown) as string);
+	    } 
         }
 
         // Export the names of variables to clean up after completion

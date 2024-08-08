@@ -84463,8 +84463,6 @@ function run() {
                 try {
                     core.info(Date.now());
                     const secretValueResponse = yield (0, utils_1.getSecretValue)(client, secretId);
-                    core.info(secretValueResponse);
-                    core.info(Date.now());
                     const secretValue = secretValueResponse.secretValue;
                     // Catch if blank prefix is specified but no json is parsed to avoid blank environment variable
                     if ((secretAlias === '') && !(parseJsonSecrets && (0, utils_1.isJSONString)(secretValue))) {
@@ -84479,6 +84477,9 @@ function run() {
                 catch (err) {
                     // Fail action for any error
                     core.setFailed(`Failed to fetch secret: '${secretId}'. Error: ${err}.`);
+                }
+                finally {
+                    core.info(Date.now());
                 }
             }
             // Export the names of variables to clean up after completion
