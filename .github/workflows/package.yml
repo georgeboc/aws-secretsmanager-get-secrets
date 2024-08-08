@@ -23,7 +23,12 @@ jobs:
           role-to-assume: arn:aws:iam::282750940485:role/githubProviderRole
           aws-region: af-south-1
           audience: sts.amazonaws.com
-
+      - name: Test get credentials from SecretsManager
+        uses: aws-actions/aws-secretsmanager-get-secrets@v1
+        with:
+          secret-ids:
+            TEST_CREDENTIALS_SECRETS_MANAGER, test
+          parse-json-secrets: true
       - name: Package
         run: |
           npm i @actions/core
