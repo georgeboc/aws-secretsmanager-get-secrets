@@ -84477,7 +84477,7 @@ function run() {
                 }
                 catch (err) {
                     // Fail action for any error
-                    core.setFailed(`Failed to fetch secret: '${secretId}'. Error: ${err}.`);
+                    core.setFailed(`Failed to fetch secret: '${secretId}'. Error: ${JSON.stringify(err)}.`);
                 }
                 finally {
                     core.info(Date.now());

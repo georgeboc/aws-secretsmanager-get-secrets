@@ -16,7 +16,6 @@ export async function run(): Promise<void> {
         // Default client region is set by configure-aws-credentials
         const client : SecretsManagerClient = new SecretsManagerClient({region: "af-south-1", customUserAgent: "github-action"});
 	core.info(JSON.stringify(client.config));
-	core.info((client.config.requestHandler.requestTimeout as unknown) as string);
         const secretConfigInputs: string[] = ["testenc,test"];  //[...new Set(core.getMultilineInput('secret-ids'))];
         const parseJsonSecrets = true; //core.getBooleanInput('parse-json-secrets');
         const nameTransformation = parseTransformationFunction("lowercase"); //core.getInput('name-transformation') | "uppercase");
@@ -57,8 +56,7 @@ export async function run(): Promise<void> {
                 secretsToCleanup = [...secretsToCleanup, ...injectedSecrets];
             } catch (err: unknown) {
                 // Fail action for any error
-                core.setFailed(`Failed to fetch secret: '${secretId}'. Error: ${err}.`)
-            } finally {
+                core.setFailed(`Failed to fetch secret: '${secretId}'. Error: ${JSON.stringify(err)}.`) } finally {
 		core.info((Date.now() as unknown) as string);
 	    } 
         }
