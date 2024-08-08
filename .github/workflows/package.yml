@@ -12,8 +12,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: main
       - name: Package
         run: |
-          npx ts-node --transpile-only index.ts
+          npm i @actions/core
+          npx ts-node --transpile-only src/index.ts
