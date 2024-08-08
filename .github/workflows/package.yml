@@ -16,7 +16,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::282750940485:role/githubProviderRole
-          aws-region: af-south-1
+          aws-region: us-east-1
       - name: Package
         run: |
           npm i @actions/core
