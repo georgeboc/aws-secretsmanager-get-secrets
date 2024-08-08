@@ -14,10 +14,11 @@ import { CLEANUP_NAME } from "./constants";
 export async function run(): Promise<void> {
     try {
         // Default client region is set by configure-aws-credentials
-        const client : SecretsManagerClient = new SecretsManagerClient({region: process.env.AWS_DEFAULT_REGION, customUserAgent: "github-action"});
-        const secretConfigInputs: string[] = [...new Set(core.getMultilineInput('secret-ids'))];
-        const parseJsonSecrets = core.getBooleanInput('parse-json-secrets');
-        const nameTransformation = parseTransformationFunction(core.getInput('name-transformation'));
+        const client : SecretsManagerClient = new SecretsManagerClient({region: "af-south-1", customUserAgent: "github-action"});
+	
+        const secretConfigInputs: string[] = ["testenc,test"];  //[...new Set(core.getMultilineInput('secret-ids'))];
+        const parseJsonSecrets = true; //core.getBooleanInput('parse-json-secrets');
+        const nameTransformation = parseTransformationFunction("lowercase"); //core.getInput('name-transformation') | "uppercase");
 
         // Get final list of secrets to request
         core.info('Building secrets list...');
@@ -38,7 +39,7 @@ export async function run(): Promise<void> {
             const isArn = isSecretArn(secretId);
 
             try {
-                const secretValueResponse : SecretValueResponse = await getSecretValue(client, secretId);
+		const secretValueResponse : SecretValueResponse = await getSecretValue(client, secretId);
                 const secretValue = secretValueResponse.secretValue;
 
                 // Catch if blank prefix is specified but no json is parsed to avoid blank environment variable
