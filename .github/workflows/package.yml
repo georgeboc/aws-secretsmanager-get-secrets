@@ -12,6 +12,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::282750940485:role/githubProviderRole
+          aws-region: af-south-1
       - name: Package
         run: |
           npm i @actions/core
