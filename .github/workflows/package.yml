@@ -32,7 +32,7 @@ jobs:
           parse-json-secrets: true
       - name: Test get credentials from SecretsManager using local repo
         continue-on-error: true
-        uses: georgeboc/aws-secretsmanager-get-secrets@HEAD
+        uses: georgeboc/aws-secretsmanager-get-secrets@refs/heads/main
         with:
           secret-ids:
             ANOTHER_TEST_CREDENTIALS_SECRETS_MANAGER, test
