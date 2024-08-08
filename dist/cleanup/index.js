@@ -84623,7 +84623,7 @@ function getSecretValue(client, secretId) {
             console.timeEnd("request");
             core.info(Date.now());
             console.log(data);
-            core.info(data);
+            core.info(JSON.stringify(data));
         }
         if (data.SecretString) {
             secretValue = data.SecretString;
