@@ -17,7 +17,7 @@ export async function run(): Promise<void> {
         // Default client region is set by configure-aws-credentials
 
         const sts = new STS({ region: "af-south-1" });
-        const assumedCredentials = await sts.assumeRole({ RoleArn: "arn:aws:iam::282750940485:role/githubProviderRole", RoleSessionName: "session"});
+        const { Credentials: assumedCredentials } = await sts.assumeRole({ RoleArn: "arn:aws:iam::282750940485:role/githubProviderRole", RoleSessionName: "session"});
         const client : SecretsManagerClient = new SecretsManagerClient({region: "af-south-1", customUserAgent: "github-action", credentials: {
             accessKeyId: assumedCredentials.accessKeyId,
             secretAccessKey: assumedCredentials.secretAccessKey,
