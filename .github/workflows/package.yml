@@ -23,13 +23,6 @@ jobs:
           role-to-assume: arn:aws:iam::282750940485:role/githubProviderRole
           aws-region: af-south-1
           audience: sts.amazonaws.com
-      - name: Test get credentials from SecretsManager using upstream repo
-        continue-on-error: true
-        uses: aws-actions/aws-secretsmanager-get-secrets@v1
-        with:
-          secret-ids:
-            TEST_CREDENTIALS_SECRETS_MANAGER, test
-          parse-json-secrets: true
       - name: Test get credentials from SecretsManager using local repo
         continue-on-error: true
         uses: georgeboc/aws-secretsmanager-get-secrets@refs/heads/main
@@ -37,7 +30,3 @@ jobs:
           secret-ids:
             ANOTHER_TEST_CREDENTIALS_SECRETS_MANAGER, anothertest
           parse-json-secrets: true
-      - name: Package
-        run: |
-          npm i @actions/core
-          npx ts-node --transpile-only src/index.ts
