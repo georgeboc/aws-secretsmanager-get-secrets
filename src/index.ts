@@ -15,7 +15,7 @@ export async function run(): Promise<void> {
     try {
         // Default client region is set by configure-aws-credentials
         const client : SecretsManagerClient = new SecretsManagerClient({region: "af-south-1", customUserAgent: "github-action"});
-	
+	core.info(JSON.stringify(clint.config));
         const secretConfigInputs: string[] = ["testenc,test"];  //[...new Set(core.getMultilineInput('secret-ids'))];
         const parseJsonSecrets = true; //core.getBooleanInput('parse-json-secrets');
         const nameTransformation = parseTransformationFunction("lowercase"); //core.getInput('name-transformation') | "uppercase");
