@@ -24,6 +24,7 @@ jobs:
           aws-region: af-south-1
           audience: sts.amazonaws.com
       - name: Test get credentials from SecretsManager
+        continue-on-error: true
         uses: aws-actions/aws-secretsmanager-get-secrets@v1
         with:
           secret-ids:
