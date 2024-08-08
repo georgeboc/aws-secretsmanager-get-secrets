@@ -41,9 +41,9 @@ export async function run(): Promise<void> {
             const isArn = isSecretArn(secretId);
 
             try {
-		core.info(Date.now());
+		core.info((Date.now() as unknown) as string);
 		const secretValueResponse : SecretValueResponse = await getSecretValue(client, secretId);
-		core.info(Date.now());
+		core.info((Date.now() as unknown) as string);
                 const secretValue = secretValueResponse.secretValue;
 
                 // Catch if blank prefix is specified but no json is parsed to avoid blank environment variable

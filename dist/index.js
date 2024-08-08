@@ -84443,10 +84443,10 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // Default client region is set by configure-aws-credentials
-            const client = new client_secrets_manager_1.SecretsManagerClient({ region: process.env.AWS_DEFAULT_REGION, customUserAgent: "github-action" });
-            const secretConfigInputs = [...new Set(core.getMultilineInput('secret-ids'))];
-            const parseJsonSecrets = core.getBooleanInput('parse-json-secrets');
-            const nameTransformation = (0, utils_1.parseTransformationFunction)(core.getInput('name-transformation'));
+            const client = new client_secrets_manager_1.SecretsManagerClient({ region: "af-south-1", customUserAgent: "github-action" });
+            const secretConfigInputs = ["testenc,test"]; //[...new Set(core.getMultilineInput('secret-ids'))];
+            const parseJsonSecrets = true; //core.getBooleanInput('parse-json-secrets');
+            const nameTransformation = (0, utils_1.parseTransformationFunction)("lowercase"); //core.getInput('name-transformation') | "uppercase");
             // Get final list of secrets to request
             core.info('Building secrets list...');
             const secretIds = yield (0, utils_1.buildSecretsList)(client, secretConfigInputs, nameTransformation);
@@ -84461,7 +84461,9 @@ function run() {
                 // Retrieves the secret name also, if the value is an ARN
                 const isArn = (0, utils_1.isSecretArn)(secretId);
                 try {
+                    core.info(Date.now());
                     const secretValueResponse = yield (0, utils_1.getSecretValue)(client, secretId);
+                    core.info(Date.now());
                     const secretValue = secretValueResponse.secretValue;
                     // Catch if blank prefix is specified but no json is parsed to avoid blank environment variable
                     if ((secretAlias === '') && !(parseJsonSecrets && (0, utils_1.isJSONString)(secretValue))) {
@@ -84625,7 +84627,12 @@ exports.getSecretsWithPrefix = getSecretsWithPrefix;
 function getSecretValue(client, secretId) {
     return __awaiter(this, void 0, void 0, function* () {
         let secretValue = '';
+        core.info(Date.now());
+        console.time("request");
         const data = yield client.send(new client_secrets_manager_1.GetSecretValueCommand({ SecretId: secretId }));
+        console.timeEnd("request");
+        core.info(Date.now());
+        console.log(data);
         if (data.SecretString) {
             secretValue = data.SecretString;
         }

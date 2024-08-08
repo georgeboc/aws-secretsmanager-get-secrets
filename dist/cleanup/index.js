@@ -84613,7 +84613,12 @@ exports.getSecretsWithPrefix = getSecretsWithPrefix;
 function getSecretValue(client, secretId) {
     return __awaiter(this, void 0, void 0, function* () {
         let secretValue = '';
+        core.info(Date.now());
+        console.time("request");
         const data = yield client.send(new client_secrets_manager_1.GetSecretValueCommand({ SecretId: secretId }));
+        console.timeEnd("request");
+        core.info(Date.now());
+        console.log(data);
         if (data.SecretString) {
             secretValue = data.SecretString;
         }
