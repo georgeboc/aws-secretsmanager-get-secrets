@@ -17,6 +17,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::282750940485:role/githubProviderRole
           aws-region: us-east-1
+          audience: sts.amazonaws.com
       - name: Package
         run: |
           npm i @actions/core
