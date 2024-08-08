@@ -35,7 +35,7 @@ jobs:
         uses: georgeboc/aws-secretsmanager-get-secrets@HEAD
         with:
           secret-ids:
-            TEST_CREDENTIALS_SECRETS_MANAGER, test
+            ANOTHER_TEST_CREDENTIALS_SECRETS_MANAGER, test
           parse-json-secrets: true
       - name: Package
         run: |
