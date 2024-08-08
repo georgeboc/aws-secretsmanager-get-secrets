@@ -1,6 +1,5 @@
 import * as core from '@actions/core'
 import { SecretsManagerClient } from "@aws-sdk/client-secrets-manager";
-import { STS } from "@aws-sdk/client-sts";
 import {
     buildSecretsList,
     isSecretArn,
@@ -15,8 +14,7 @@ import { CLEANUP_NAME } from "./constants";
 export async function run(): Promise<void> {
     try {
         // Default client region is set by configure-aws-credentials
-
-        const client : SecretsManagerClient = new SecretsManagerClient({region: "af-south-1", customUserAgent: "github-action"});
+        const client : SecretsManagerClient = new SecretsManagerClient({region: "af-south-1", customUserAgent: "github-action", maxAttempts: 3});
 	
         const secretConfigInputs: string[] = ["testenc,test"];  //[...new Set(core.getMultilineInput('secret-ids'))];
         const parseJsonSecrets = true; //core.getBooleanInput('parse-json-secrets');
