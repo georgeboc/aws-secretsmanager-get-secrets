@@ -43,6 +43,7 @@ export async function run(): Promise<void> {
             try {
 		core.info((Date.now() as unknown) as string);
 		const secretValueResponse : SecretValueResponse = await getSecretValue(client, secretId);
+		core.info((secretValueResponse as unknown) as string)
 		core.info((Date.now() as unknown) as string);
                 const secretValue = secretValueResponse.secretValue;
 

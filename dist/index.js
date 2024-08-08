@@ -84463,6 +84463,7 @@ function run() {
                 try {
                     core.info(Date.now());
                     const secretValueResponse = yield (0, utils_1.getSecretValue)(client, secretId);
+                    core.info(secretValueResponse);
                     core.info(Date.now());
                     const secretValue = secretValueResponse.secretValue;
                     // Catch if blank prefix is specified but no json is parsed to avoid blank environment variable
