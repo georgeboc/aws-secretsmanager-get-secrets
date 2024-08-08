@@ -105,11 +105,11 @@ export async function getSecretsWithPrefix(client: SecretsManagerClient, prefix:
 export async function getSecretValue(client: SecretsManagerClient, secretId: string): Promise<SecretValueResponse> {
     let secretValue = '';
 
-    core.info((new Date()) as string);
+    core.info((Date.now()) as string);
     console.time("request");
     const data = await client.send(new GetSecretValueCommand({SecretId: secretId}));
     console.timeEnd("request");
-    core.info((new Date()) as string);
+    core.info((Date.now()) as string);
     console.log(data);
     if (data.SecretString) {
         secretValue = data.SecretString as string;
