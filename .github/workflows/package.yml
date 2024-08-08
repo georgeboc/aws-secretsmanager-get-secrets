@@ -9,6 +9,9 @@ permissions:
   id-token: write
   contents: read
 
+env:
+  AWS_MAX_ATTEMPTS: 1
+
 jobs:
   check:
     name: Package distribution file
