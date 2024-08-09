@@ -11,6 +11,7 @@ permissions:
 
 env:
   AWS_MAX_ATTEMPTS: 1
+  NODE_OPTIONS: "--network-family-autoselection-attempt-timeout=1000"
 
 jobs:
   check:
