@@ -54,8 +54,9 @@ export async function run(): Promise<void> {
 
                 const injectedSecrets = injectSecret(secretAlias, secretValue, parseJsonSecrets, nameTransformation);
                 secretsToCleanup = [...secretsToCleanup, ...injectedSecrets];
-            } catch (err: unknown) {
+            } catch (err: any) {
                 // Fail action for any error
+		console.log(err.stack as string);
                 core.setFailed(`Failed to fetch secret: '${secretId}'. Error: ${JSON.stringify(err)}.`) } finally {
 		core.info((Date.now() as unknown) as string);
 	    } 
